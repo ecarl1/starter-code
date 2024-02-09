@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>My test page</title>
+  </head>
+  <body>
+    <p>This is my page</p>
+  </body>
+
+  <script>
+    //code added
+
+    async function myFetch(){
+        let resp = await fetch("coffee.jpg")
+        if(!resp.ok) throw new Error("HTTP error : ${resp.status}")
+        else{
+            let myBlob = await resp.blob();
+            let objectURL = URL.createObjectURL(myBlob);
+            let image = document.createElement("img");
+            image.src = objectURL;
+            document.body.appendChild(image);
+        }
+
+    }
+
+    myFetch().catch((er)=>{
+        console.log("Error fetching blob" + er.message);
+    })
+    
+
+    //
+    let objectURL = URL.createObjectURL(myBlob);
+    let image = document.createElement("img");
+    image.src = objectURL;
+    document.body.appendChild(image);
+  </script>
+</html>
